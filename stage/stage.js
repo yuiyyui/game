@@ -19,6 +19,8 @@ var enemy = [];
 var gamemode = 1; //ゲームオーバー判定
 var counter = 0; //走行距離
 
+
+
 function init() {
     canvas[0] = document.getElementById('canvas');
     canvas[1] = document.getElementById('canvas2');
@@ -109,6 +111,7 @@ function Onanime() {
         posy -= uPress;
     }
 
+    
     var xx = Math.round(posx / 8); //Math.round: 小数点以下四捨五入
     var yy = Math.round((800 - posy) / 8); //自分の座標を道路に合わせて変換
     nn = road[yp + yy][xx];
@@ -184,7 +187,14 @@ function draw(yp) { //番号毎に色の塗り分け
         }
     }
     context[bg].drawImage(imgm, posx - 32, posy - 32, 64, 64);
-    if (gamemode == 0) context[bg].drawImage(imgf, posx - 20, posy - 20, 64, 64);
+    if (gamemode == 0) {
+        context[bg].drawImage(imgf, posx - 20, posy - 20, 64, 64);
+        setTimeout(() => {
+            window.location.href = 'gameover.html';
+        }, 1500); // 関数を渡す
+    
+
+    }
 
     for (i = 0; i < 5; i++) {
         context[bg].drawImage(enemy[i].img, enemy[i].x - 32, enemy[i].y - 32, 64, 64);
@@ -224,4 +234,6 @@ function keyDownHandler(e) {
         dPress = 3;
     }
 }
+
+
 
